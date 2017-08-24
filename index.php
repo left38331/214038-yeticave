@@ -18,6 +18,17 @@ $now = strtotime('now');
 
 // далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
 // ...
+$remaining_seconds = $tomorrow - $now;
+
+// целое количество оставшихся часов до полуночи
+$remaining_hours_integer = floor($remaining_seconds / 3600);
+
+// количество минут целых, которых не хватает до целого часа
+$remaining_minusts_integer = floor($remaining_seconds / 60) - $remaining_hours_integer * 60;
+
+// вывод времени в формате ЧЧ:ММ
+$lot_time_remaining = $remaining_hours_integer .":" .$remaining_minusts_integer;
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
