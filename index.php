@@ -17,7 +17,22 @@ $tomorrow = strtotime('tomorrow midnight');
 $now = strtotime('now');
 
 // далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
-// ...
+
+// функция вывода времени в формате ЧЧ:ММ, с учетом добавления 0 перед цифрой, если цифра меньше 10
+function time_add_zero($start, $end) {
+	$remaining_seconds = $end - $start;
+	$remaining_hours_integer = floor($remaining_seconds / 3600);
+	$remaining_minusts_integer = floor($remaining_seconds / 60) - $remaining_hours_integer * 60;
+	if ($remaining_hours_integer < 10) {
+		$remaining_hours_integer = '0' . $remaining_hours_integer;
+	}
+	if ($remaining_minusts_integer < 10) {
+		$remaining_minusts_integer = '0' . $remaining_minusts_integer;
+	}
+	return $remaining_hours_integer . ':' . $remaining_minusts_integer;
+}
+$lot_time_remaining = time_add_zero($now, $tomorrow);
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
