@@ -7,6 +7,21 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
+
+function format_time($array_time) {
+    $time_now = strtotime('now');
+    $diff_time = $time_now - $array_time;
+    if ($diff_time > 86400) {
+        $time_lost = date("m.d.y в H:i", $array_time);
+    }
+    else if ($diff_time < 3600) {
+        $time_lost = floor($diff_time/60) . " минут назад";
+    }
+    else {
+        $time_lost = floor($diff_time/3600) . " часов назад";
+    }
+    return $time_lost;
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,11 +126,13 @@ $bets = [
                     <h3>История ставок (<span>4</span>)</h3>
                     <!-- заполните эту таблицу данными из массива $bets-->
                     <table class="history__list">
+                    <?php foreach ($bets as $val): ?>
                         <tr class="history__item">
-                            <td class="history__name"><!-- имя автора--></td>
-                            <td class="history__price"><!-- цена--> р</td>
-                            <td class="history__time"><!-- дата в человеческом формате--></td>
+                            <td class="history__name"><?=$val['name']; ?></td>
+                            <td class="history__price"><?=$val['price']; ?></td>
+                            <td class="history__time"><?=format_time($val['ts']) ;?></td>
                         </tr>
+                     <?php endforeach; ?>
                     </table>
                 </div>
             </div>
