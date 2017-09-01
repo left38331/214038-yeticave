@@ -11,5 +11,4 @@ function renderTemplate($path, $array) {
 		return "";
 	}
 }
-
 ?>
