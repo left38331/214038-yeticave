@@ -77,9 +77,9 @@ $equipment = [
 	]
 ];
 
-$page_content = renderTemplate('templates/index.php', ['equipment' => $equipment, '$categories' => $categories, 'lot_time_remaining' => $lot_time_remaining]);
+$content = renderTemplate('templates/index.php', ['equipment' => $equipment, '$categories' => $categories, 'lot_time_remaining' => $lot_time_remaining]);
 
-$layout_content = renderTemplate('templates/layout.php',['title' => 'Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar, 'page_content' => $page_content]);
+$layout_content = renderTemplate('templates/layout.php',['title' => 'Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar, 'content' => $content]);
 
 print($layout_content);
 ?>
