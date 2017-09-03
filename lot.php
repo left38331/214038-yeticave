@@ -1,4 +1,5 @@
 <?php
+require_once('lots_list.php');
 
 // ставки пользователей, которыми надо заполнить таблицу
 $bets = [
@@ -22,6 +23,23 @@ function format_time($array_time) {
     }
     return $time_lost;
 }
+
+//определяет переданный в параметрах идентификатор и получает по нему соответствующий лот из массива
+if (isset($_GET['lot_id'])) {
+	$lot_id = $_GET['lot_id'];
+	}
+else {
+	$lot_id = 'undefined';
+}
+
+// если lot_id нет в массиве, то выводится ошибка
+if (!array_key_exists($lot_id, $equipment)) {
+	header('Content-Type: text/html; charset=utf-8'); // чтобы надпись на русском выводилась корректно, а не краказябры
+	header("HTTP/1.0 404 Not Found");
+	print 'Ошибка 404';
+	die();
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +55,7 @@ function format_time($array_time) {
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
-        <a class="main-header__logo" href="index.html">
+        <a class="main-header__logo" href="index.php">
             <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
         <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
@@ -82,23 +100,14 @@ function format_time($array_time) {
         </ul>
     </nav>
     <section class="lot-item container">
-        <h2>DC Ply Mens 2016/2017 Snowboard</h2>
+			<h2><?= $equipment[$lot_id]['name']; ?></h2>
         <div class="lot-item__content">
             <div class="lot-item__left">
                 <div class="lot-item__image">
-                    <img src="img/lot-image.jpg" width="730" height="548" alt="Сноуборд">
+									<img src="<?= $equipment[$lot_id]['address']; ?>" width="730" height="548" alt="<?= $equipment[$lot_id]['name']; ?>">
                 </div>
-                <p class="lot-item__category">Категория: <span>Доски и лыжи</span></p>
-                <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
-                    снег
-                    мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот
-                    снаряд
-                    отличной гибкостью и отзывчивостью, а симметричная геометрия в сочетании с классическим прогибом
-                    кэмбер
-                    позволит уверенно держать высокие скорости. А если к концу катального дня сил совсем не останется,
-                    просто
-                    посмотрите на Вашу доску и улыбнитесь, крутая графика от Шона Кливера еще никого не оставляла
-                    равнодушным.</p>
+							<p class="lot-item__category">Категория: <span><?= $equipment[$lot_id]['category']; ?></span></p>
+							<p class="lot-item__description"><?=$equipment[$lot_id]['description']; ?></p>
             </div>
             <div class="lot-item__right">
                 <div class="lot-item__state">
@@ -108,7 +117,7 @@ function format_time($array_time) {
                     <div class="lot-item__cost-state">
                         <div class="lot-item__rate">
                             <span class="lot-item__amount">Текущая цена</span>
-                            <span class="lot-item__cost">11 500</span>
+													<span class="lot-item__cost"><?= $equipment[$lot_id]['price']; ?></span>
                         </div>
                         <div class="lot-item__min-cost">
                             Мин. ставка <span>12 000 р</span>
