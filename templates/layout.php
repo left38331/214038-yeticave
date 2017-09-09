@@ -25,15 +25,18 @@
 				<a class="main-header__add-lot button" href="add.php">Добавить лот</a>
 
 				<nav class="user-menu">
+				
+					
 
 					<!-- здесь должен быть PHP код для показа аватара пользователя -->
 
-					<?php if ($is_auth == true) : ?>
+					<?php if ($is_auth) : ?>
 					<div class="user-menu__image">
 						<img src="<?=$user_avatar; ?>" width="40" height="40" alt="Пользователь">
 					</div>
 					<div class="user-menu__logged">
 						<p><?=$user_name; ?></p>
+						<p><a href="/logout.php">Выйти</a></p>
 					</div>
 					<?php else : ?>
 					<ul class="user-menu__list">
@@ -41,7 +44,7 @@
 							<a href="#">Регистрация</a>
 						</li>
 						<li class="user-menu__item">
-							<a href="#">Вход</a>
+							<a href="login.php">Вход</a>
 						</li>
 					</ul>
 
@@ -55,6 +58,8 @@
 			<?=$content;?>
 			<?=$add_form;?>
 			<?=$add_lot;?>
+			<?=$enter;?>
+			<?=$lot_content;?>
 		</main>
 
 		<footer class="main-footer">
