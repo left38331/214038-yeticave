@@ -24,20 +24,13 @@
 </section>
 <section class="lots">
 	<div class="lots__header">
-		<h2>Открытые лоты</h2>
+		<h2>Открытые лоты	</h2>
 		<select class="lots__select">
 
-			<?php
-			// данные для select выбора обор-ия, заданного через массив
-			
-			$index= 0;
-			$number = count($categories);
-			while ($index < $number) {
-				$cat = $categories[$index];
-				print ('<option>' . $cat . '</option>');
-				$index = $index + 1;
-			}
-			?>
+			<?php 
+			foreach ($categories as $val): ?>
+			<option><?=$val ?> </option>
+			<?php endforeach; ?>
 
 		</select>
 	</div>
