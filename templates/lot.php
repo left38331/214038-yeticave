@@ -9,7 +9,7 @@
 			<p class="lot-item__description"><?=$equipment[$lot_id]['description']; ?></p>
 		</div>
 		<div class="lot-item__right">
-			<?php if ($is_auth) : ?>
+			<?php if ($is_auth and !$exist) : ?>
 			<div class="lot-item__state" >
 				<div class="lot-item__timer timer">
 					10:54:12
@@ -23,7 +23,7 @@
 						Мин. ставка <span>12 000 р</span>
 					</div>
 				</div>
-				<form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
+				<form class="lot-item__form" action="lot.php<?=$lot_page ?>" method="post">
 					<p class="lot-item__form-item">
 						<label for="cost">Ваша ставка</label>
 						<input id="cost" type="number" name="cost" placeholder="12 000">
