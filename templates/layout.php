@@ -60,6 +60,7 @@
 			<?=$add_lot;?>
 			<?=$enter;?>
 			<?=$lot_content;?>
+			<?=$bet_add;?>
 		</main>
 
 		<footer class="main-footer">
