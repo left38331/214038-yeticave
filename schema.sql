@@ -40,14 +40,10 @@ CREATE TABLE bets (
 	lot_id INT
 );
 
-insert into categories set category = 'Доски и лыжи';
-insert into categories set category = 'Крепления';
-insert into categories set category = 'Ботинки';
-insert into categories set category = 'Одежда';
-insert into categories set category = 'Инструменты';
-insert into categories set category = 'Разное';
+
 
 CREATE UNIQUE INDEX email ON users(email);
+CREATE UNIQUE INDEX category ON categories(category);
 
 CREATE INDEX category_name ON categories(category);
 CREATE INDEX lot_category_id_index ON lots(category_id);
