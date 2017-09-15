@@ -36,7 +36,7 @@ $equipment = [
 'description' => 'Описание отсутствует'
 ],
 5 => [
-'name' => 'Маска Oakley Canopy	',
+'name' => 'Маска Oakley Canopy',
 'category' => 'Разное',
 'price' => '5400',
 'address' => 'img/lot-6.jpg',
