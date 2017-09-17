@@ -2,6 +2,10 @@
 session_start();
 
 require_once('functions.php');
+
+require_once('mysql_helper.php');
+require_once('init.php');
+
 require_once('lots_list.php');
 require_once('data.php');
 // ставки пользователей, которыми надо заполнить таблицу
