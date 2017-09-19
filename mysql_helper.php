@@ -11,11 +11,9 @@
  */
 function db_get_prepare_stmt($link, $sql, $data = []) {
     $stmt = mysqli_prepare($link, $sql);
-
     if ($data) {
         $types = '';
         $stmt_data = [];
-
         foreach ($data as $value) {
             $type = null;
 
@@ -28,18 +26,15 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
             else if (is_double($value)) {
                 $type = 'd';
             }
-
             if ($type) {
                 $types .= $type;
                 $stmt_data[] = $value;
             }
         }
-
         $values = array_merge([$stmt, $types], $stmt_data);
-
         $func = 'mysqli_stmt_bind_param';
-//        $func(...$values); эта строка вызывает ошибку
+				$func($values);
+//			$func(...$values);
     }
-
     return $stmt;
 }
