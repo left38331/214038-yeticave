@@ -102,9 +102,9 @@ function insert_data($con, $table, $data) {
 		if ($execute) {
 			$last_id = mysqli_insert_id($con);
 			return $last_id;
+		} else {
+			return false;
 		}
-	} esle {
-		return false;
 	}
 }
 
