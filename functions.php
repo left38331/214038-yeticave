@@ -1,5 +1,7 @@
 <?php 
 
+require_once('mysql_helper.php');
+
 // функция подключения шаблона и параметров
 function renderTemplate($path, $array) {
 	if (file_exists($path)) {
@@ -57,4 +59,65 @@ function format_time($array_time) {
 }
 
 
+// функция получения данных, выполнения запроса SELECT
+function select_data($con, $sql, $data = []) {
+	$rows = [];
+	$stmt = db_get_prepare_stmt($con, $sql, $data);
+	
+	if ($stmt) {
+		$execute = mysqli_stmt_execute($stmt);
+		if ($execute) {
+			$result = mysqli_stmt_get_result($stmt);
+			if ($result) {
+				$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+			}
+		}
+	}
+	return $rows;
+}
+
+// функция вставки данных, выполнения запроса INSERT
+function insert_data($con, $table, $data) {
+	
+	$column_names = [];
+	$values = [];
+	$count_values = [];
+	
+	foreach ($data as $key => $value) {
+		$column_names[] = $key;
+		$values[] =$value;
+		$count_values[] = '?';
+	}
+	
+	// записываем элементы массива в строку через запятую
+	$count_values_string = implode(",", $count_values);
+	$column_names_string = implode(",", $column_names);
+	
+	$sql = 'INSERT INTO' . $table . '(' . $column_names . ')  VALUES  (' . $count_values . ')' ;
+	
+	$stmt = db_get_prepare_stmt($con, $sql, $values);
+	
+	if ($stmt) {
+		$execute = mysqli_stmt_execute($stmt);
+		if ($execute) {
+			$last_id = mysqli_insert_id($con);
+			return $last_id;
+		} else {
+			return false;
+		}
+	}
+}
+
+// функция произвольного запроса, кроме SELECT и INSERT
+function query_execute($con, $sql, $data = []) {
+	$stmt = db_get_prepare_stmt($con, $sql, $data);
+	
+	if ($stmt) {
+		$execute = mysqli_stmt_execute($stmt);
+		if ($execute) {
+			return true;
+		}
+	}
+	return false;
+}
 ?>
