@@ -18,15 +18,19 @@ function renderTemplate($path, $array) {
 // функция вывода времени в формате ЧЧ:ММ, с учетом добавления 0 перед цифрой, если цифра меньше 10
 function time_add_zero($start, $end) {
 	$remaining_seconds = $end - $start;
-	$remaining_hours_integer = floor($remaining_seconds / 3600);
-	$remaining_minusts_integer = floor($remaining_seconds / 60) - $remaining_hours_integer * 60;
+	$remaining_days_integer = floor($remaining_seconds / 86400);
+
+	$remaining_hours_integer = floor($remaining_seconds / 3600) - $remaining_days_integer * 24;
+
+	$remaining_minusts_integer = floor($remaining_seconds / 60) - $remaining_days_integer * 1440 - $remaining_hours_integer * 60;
+
 	if ($remaining_hours_integer < 10) {
 		$remaining_hours_integer = '0' . $remaining_hours_integer;
 	}
 	if ($remaining_minusts_integer < 10) {
 		$remaining_minusts_integer = '0' . $remaining_minusts_integer;
 	}
-	return $remaining_hours_integer . ':' . $remaining_minusts_integer;
+	return $remaining_days_integer .' дней' . ' : ' . $remaining_hours_integer . ' часов' . ' : ' . $remaining_minusts_integer . ' минут';
 }
 
 // функция проверки мыла, в списке доступных

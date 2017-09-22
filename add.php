@@ -166,7 +166,7 @@ if (isset($_SESSION['user'])) {
 	// подключаем шаблон формы 
 	$add_form = renderTemplate('templates/add.php', ['class_form' => $class_form, 'class_item_lot_name' => $class_item_lot_name, 'class_item_message' => $class_item_message, 'class_item_lot_rate' => $class_item_lot_rate, 'class_item_lot_step' => $class_item_lot_step, 'class_item_lot_date' => $class_item_lot_date, 'error_text' => $error_text, 'error_text_cat' => $error_text_cat, 'name' => $name, 'message' => $message, 'rate' => $rate, 'step' => $step, 'class_form_cat' => $class_form_cat, 'date' => $date, 'selected_1' => $selected_1, 'selected_2' => $selected_2, 'selected_3' => $selected_3, 'selected_4' => $selected_4, 'selected_5' => $selected_5, 'selected_6' => $selected_6, 'category' => $category, 'class_file' => $class_file]);
 	// выводим его с лойаутом и отображаем
-	$layout_content = renderTemplate('templates/layout.php',['title' => 'Добавить лот', 'is_auth' => $user, 'user_name' => $user['name'], 'user_avatar' => $user_avatar, 'link' => 'href="index.php"', 'add_form' => $add_form]);
+	$layout_content = renderTemplate('templates/layout.php',['title' => 'Добавить лот', 'is_auth' => $user, 'user_name' => $user['name'], 'user_avatar' => $user_avatar, 'link' => 'href="index.php"', 'add_form' => $add_form, 'categories' => $categories]);
 	print($layout_content);
 }
 // если "нет" - то выводим надпись такую

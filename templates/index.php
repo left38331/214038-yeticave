@@ -2,24 +2,17 @@
 	<h2 class="promo__title">Нужен стафф для катки?</h2>
 	<p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
 	<ul class="promo__list">
-		<li class="promo__item promo__item--boards">
-			<a class="promo__link" href="all-lots.html">Доски и лыжи</a>
+		
+		<?php $index = 0;
+		foreach ($categories as $val): ?>
+
+		<li class="promo__item promo__item--<?=$class_for_category[$index]?>">
+			<a class="promo__link" href="all-lots.html"><?=$val ?></a>
 		</li>
-		<li class="promo__item promo__item--attachment">
-			<a class="promo__link" href="all-lots.html">Крепления</a>
-		</li>
-		<li class="promo__item promo__item--boots">
-			<a class="promo__link" href="all-lots.html">Ботинки</a>
-		</li>
-		<li class="promo__item promo__item--clothing">
-			<a class="promo__link" href="all-lots.html">Одежда</a>
-		</li>
-		<li class="promo__item promo__item--tools">
-			<a class="promo__link" href="all-lots.html">Инструменты</a>
-		</li>
-		<li class="promo__item promo__item--other">
-			<a class="promo__link" href="all-lots.html">Разное</a>
-		</li>
+
+		<?php $index++ ?>
+		<?php endforeach; ?>
+		
 	</ul>
 </section>
 <section class="lots">
@@ -39,18 +32,18 @@
 		<?php foreach ($equipment as $key => $val): ?>
 		<li class="lots__item lot">
 			<div class="lot__image">
-				<img src="<?=$val['address']; ?>" width="350" height="260" alt="<?=$val['category']; ?>">
+				<img src="<?=$val['image']; ?>" width="350" height="260" alt="<?=$val['category_id']; ?>">
 			</div>
 			<div class="lot__info">
-				<span class="lot__category"><?=$val['category']; ?></span>
-				<h3 class="lot__title"><a class="text-link" href="lot.php?lot_id=<?=$key; ?>"><?=$val['name']; ?></a></h3>
+				<span class="lot__category"><?=$val['category_id']; ?></span>
+				<h3 class="lot__title"><a class="text-link" href="lot.php?lot_id=<?=$key; ?>"><?=$val['lot_name']; ?></a></h3>
 				<div class="lot__state">
 					<div class="lot__rate">
 						<span class="lot__amount">Стартовая цена</span>
-						<span class="lot__cost"><?=$val['price']; ?><b class="rub">р</b></span>
+						<span class="lot__cost"><?=$val['bet_start']; ?><b class="rub">р</b></span>
 					</div>
 					<div class="lot__timer timer">
-						<?=$lot_time_remaining;?>
+						<?=time_add_zero(strtotime('now'), strtotime($val['date_end'])); ?>
 					</div>
 				</div>
 			</div>

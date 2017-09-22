@@ -165,6 +165,24 @@ cost = '12050',
 user_id = '2',
 lot_id = '4';
 
+INSERT INTO bets SET 
+date_add = '2017-12-23 10:30:00',
+cost = '15999',
+user_id = '1',
+lot_id = '0';
+
+INSERT INTO bets SET 
+date_add = '2017-12-24 12:30:00',
+cost = '14000',
+user_id = '1',
+lot_id = '2';
+
+INSERT INTO bets SET 
+date_add = '2017-12-24 12:30:00',
+cost = '15000',
+user_id = '2',
+lot_id = '1';
+
 
 
 /* получить список из всех категорий; */

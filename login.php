@@ -71,11 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
+// показываем надпись, что теперь вы можете зарегистрироваться введя логин и пароль
+if (isset($_COOKIE['login_password'])) {
+	print("yes");
+	$is_login_password = 1;
+}
 
 
-$enter = renderTemplate('templates/login.php', ['users' => $users, 'class_form' => $class_form, 'class_item_email' => $class_item_email, 'class_item_password' => $class_item_password, 'email' => $email, 'password' => $password, 'error_password' => $error_password, 'error_email' => $error_email]);
+$enter = renderTemplate('templates/login.php', ['users' => $users, 'class_form' => $class_form, 'class_item_email' => $class_item_email, 'class_item_password' => $class_item_password, 'email' => $email, 'password' => $password, 'error_password' => $error_password, 'error_email' => $error_email, 'categories' => $categories, 'is_login_password' => $is_login_password]);
 
-$layout_content = renderTemplate('templates/layout.php',['title' => 'Вход', 'link' => 'href="index.php"', 'enter' => $enter, 'user_name' => $user['name'], 'is_auth' => $user, 'user_avatar' => $user_avatar  ]);
+$layout_content = renderTemplate('templates/layout.php',['title' => 'Вход', 'link' => 'href="index.php"', 'enter' => $enter, 'user_name' => $user['name'], 'is_auth' => $user, 'user_avatar' => $user_avatar, 'categories' => $categories  ]);
 
 print($layout_content);
 

@@ -16,7 +16,4 @@ $tomorrow = strtotime('tomorrow midnight');
 // временная метка для настоящего времени
 $now = strtotime('now');
 
-$categories = ['Доски и лыжи','Крепления','Ботинки','Одежда','Инструменты','Разное'];
-
-$lot_time_remaining = time_add_zero($now, $tomorrow);
 ?>

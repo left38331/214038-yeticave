@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
  *
@@ -9,32 +8,71 @@
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
-    $stmt = mysqli_prepare($link, $sql);
-    if ($data) {
-        $types = '';
-        $stmt_data = [];
-        foreach ($data as $value) {
-            $type = null;
-
-            if (is_int($value)) {
-                $type = 'i';
-            }
-            else if (is_string($value)) {
-                $type = 's';
-            }
-            else if (is_double($value)) {
-                $type = 'd';
-            }
-            if ($type) {
-                $types .= $type;
-                $stmt_data[] = $value;
-            }
-        }
-        $values = array_merge([$stmt, $types], $stmt_data);
-        $func = 'mysqli_stmt_bind_param';
-				$func($values);
-//			$func(...$values);
-    }
-    return $stmt;
+	function db_get_prepare_stmt($link, $sql, $data = []) {
+	$stmt = mysqli_prepare($link, $sql);
+	if ($data) {
+		$types = '';
+		$stmt_data = [];
+		foreach ($data as $value) {
+			$type = null;
+			if (is_int($value)) {
+				$type = 'i';
+			} elseif (is_string($value)) {
+				$type = 's';
+			} elseif (is_double($value)) {
+				$type = 'd';
+			}
+			if ($type) {
+				$types .= $type;
+				$stmt_data[] = $value;
+			}
+		}
+		$values = array_merge([$stmt, $types], $stmt_data);
+		$func = 'mysqli_stmt_bind_param';
+		print_r($values);
+		foreach ($values as $value) {
+			echo gettype($value), "\n";
+		}
+		$func(...$values);
+	}
+	return $stmt;
 }
+
+
+
+
+// функция для версии PHP 5.5 
+//function db_get_prepare_stmt($link, $sql, $data = []) {
+//	$stmt = mysqli_prepare($link, $sql);
+//	if ($data) {
+//		$types = '';
+//		$stmt_data = [];
+//		foreach ($data as $value) {
+//			$type = null;
+//			if (is_int($value)) {
+//				$type = 'i';
+//			}
+//			else if (is_string($value)) {
+//				$type = 's';
+//			}
+//			else if (is_double($value)) {
+//				$type = 'd';
+//			}
+//			if ($type) {
+//				$types .= $type;
+//				$stmt_data[] = $value;
+//			}
+//		}
+//		
+//		$array_to_string = implode(",", $stmt_data);
+//		
+//
+//		$func = 'mysqli_stmt_bind_param';
+//
+//		
+//		$func($stmt, $types, $array_to_string);
+//	}
+//	return $stmt;
+
+
+
